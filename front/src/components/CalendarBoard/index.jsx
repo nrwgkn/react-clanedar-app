@@ -12,7 +12,7 @@ const CalendarBoard = () => {
       <GridList className={styles.grid} cols={7} spacing={0} cellHeight="auto">
         {calendar.map((c) => (
           <li key={c.toISOString()}>
-            <CalendarElement>{c.format("D")}</CalendarElement>
+            <CalendarElement day={c} />
           </li>
         ))}
       </GridList>
