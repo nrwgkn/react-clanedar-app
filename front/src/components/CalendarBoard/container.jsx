@@ -8,7 +8,8 @@ const mapStateToProps = (state) => ({ calendar: state.calendar });
 
 // mergeProps: mapStateToProps で生成された props と mapDisapatchToProps で生成された props を引数にとり、コンポーネントで使う形に整形して渡す関数
 // mapStateToPropsの結果が前回と異なっていたときにだけ実行
-const mergeProps = (stateProps) => ({
+const mergeProps = (stateProps, dispatchProps) => ({
+  month: stateProps.calendar,
   calendar: createCalendar(stateProps.calendar),
 });
 
