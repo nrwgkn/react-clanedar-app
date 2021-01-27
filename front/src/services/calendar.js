@@ -1,8 +1,8 @@
 import dayjs from "dayjs";
 
-export const createCalendar = () => {
+export const createCalendar = (month) => {
   // 今月の最初の日を取得
-  const firstDay = dayjs().startOf("month");
+  const firstDay = getMonth(month);
   // 最初の日の曜日の index を取得
   const firstDayIndex = firstDay.day();
 
@@ -14,6 +14,12 @@ export const createCalendar = () => {
 
       return day;
     });
+};
+
+// その月の dayjs インスタンスを返す
+// dayjs は完全な日付でなくても月や年の情報があれば他をゼロ値で初期化する
+export const getMonth = ({ year, month }) => {
+  return dayjs(`${year}-${month}`);
 };
 
 export const isSameDay = (d1, d2) => {
