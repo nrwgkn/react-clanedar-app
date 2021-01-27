@@ -6,15 +6,19 @@ import dayjs from "dayjs";
 const CalendarElement = ({ day }) => {
   const isFirstDay = day.date() === 1;
   const format = isFirstDay ? "M月D日" : "D";
-
+  // 当日かどうか判断
   const today = dayjs();
   const compareFormat = "YYYYMMDD";
   const isToday = day.format(compareFormat) === today.format(compareFormat);
+  // 今月以外をグレーダウン
+  const isCurrentMonth = day.month() === today.month();
+  const textColor = isCurrentMonth ? "textPrimary" : "textSecondary";
 
   return (
     <div className={styles.element}>
       <Typography
         className={styles.date}
+        color={textColor}
         align="center"
         variant="caption"
         component="div"
