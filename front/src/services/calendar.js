@@ -33,3 +33,20 @@ export const isSameMonth = (m1, m2) => {
 };
 
 export const isFirstDay = (day) => day.date() === 1;
+
+export const getNextMonth = (month) => {
+  // 日付として演算するために dayjs インスタンスに変換
+  const day = getMonth(month).add(1, "month");
+  // 元のフォーマットに戻す
+  return formatMonth(day);
+};
+
+export const getPreviousMonth = (month) => {
+  const day = getMonth(month).add(-1, "month");
+  return formatMonth(day);
+};
+
+export const formatMonth = (day) => ({
+  month: day.month() + 1,
+  year: day.year(),
+});
