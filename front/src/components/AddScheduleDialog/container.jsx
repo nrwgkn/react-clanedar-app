@@ -16,6 +16,7 @@ const mapDisapatchToProps = (dispatch) => ({
     dispatch(addScheduleSetValue(value));
   },
   saveSchedule: (schedule) => {
+    // 引数に schedule が必要だがここでは取得できないので、受け取った値をそのまま dispatch
     dispatch(schedulesAddItem(schedule));
     dispatch(addScheduleCloseDialog());
   },
@@ -24,6 +25,7 @@ const mapDisapatchToProps = (dispatch) => ({
 const mergeProps = (stateProps, dispatchProps) => ({
   ...stateProps,
   ...dispatchProps,
+  // schedule を stateProps から取得できる
   saveSchedule: () => {
     const {
       schedule: { form: schedule },
