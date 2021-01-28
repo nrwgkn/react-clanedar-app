@@ -7,14 +7,17 @@ import {
   Button,
   Input,
   Grid,
+  IconButton,
 } from "@material-ui/core";
 import {
   LocationOnOutlined,
   NotesOutlined,
   AccessTime,
+  Close,
 } from "@material-ui/icons";
 import { DatePicker } from "@material-ui/pickers";
 import { withStyles } from "@material-ui/core/styles";
+import * as styles from "./style.css";
 
 const spacer = { margin: "4px 0" };
 
@@ -32,6 +35,13 @@ const AddScheduleDialog = ({
 }) => {
   return (
     <Dialog open={isDialogOpen} onClose={closeDialog} maxWidth="xs" fullWidth>
+      <DialogActions>
+        <div className={styles.closeButton}>
+          <IconButton onClick={closeDialog} size="small">
+            <Close />
+          </IconButton>
+        </div>
+      </DialogActions>
       <DialogContent>
         <Title
           autoFocus
