@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mergeProps = (stateProps, dispatchProps) => ({
   ...stateProps,
-  dispatchProps,
+  ...dispatchProps,
   deleteItem: () => {
     const { id } = stateProps.schedule.item;
     dispatchProps.deleteItem(id);
