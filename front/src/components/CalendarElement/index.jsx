@@ -10,7 +10,8 @@ import {
 } from "../../services/calendar";
 import Schedule from "../Schedule";
 
-const CalendarElement = ({ day, month, schedules }) => {
+// props という変数に残った props を全て格納して、 <Schedule /> に {...props} ともう一度展開して渡す
+const CalendarElement = ({ day, month, schedules, ...props }) => {
   // 今月以外をグレーダウン
   const currentMonth = getMonth(month);
   const isCurrentMonth = isSameMonth(day, currentMonth);
@@ -38,7 +39,7 @@ const CalendarElement = ({ day, month, schedules }) => {
       </Typography>
       <div className={styles.schedules}>
         {schedules.map((e) => (
-          <Schedule key={e.id} schedule={e} />
+          <Schedule key={e.id} schedule={e} {...props} />
         ))}
       </div>
     </div>
