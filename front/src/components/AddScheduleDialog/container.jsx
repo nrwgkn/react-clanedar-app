@@ -4,7 +4,7 @@ import {
   addScheduleCloseDialog,
   addScheduleSetValue,
 } from "../../redux/addSchedule/actions";
-import { schedulesAddItem } from "../../redux/schedules/actions";
+import { asyncSchedulesAddItem } from "../../redux/schedules/effects";
 
 const mapStateToProps = (state) => ({ schedule: state.addSchedule });
 
@@ -17,7 +17,7 @@ const mapDisapatchToProps = (dispatch) => ({
   },
   saveSchedule: (schedule) => {
     // 引数に schedule が必要だがここでは取得できないので、受け取った値をそのまま dispatch
-    dispatch(schedulesAddItem(schedule));
+    dispatch(asyncSchedulesAddItem(schedule));
     dispatch(addScheduleCloseDialog());
   },
 });
