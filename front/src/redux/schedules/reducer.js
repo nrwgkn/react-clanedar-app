@@ -16,8 +16,8 @@ const schedulesReducer = (state = init, action) => {
     case SCHEDULES_ADD_ITEM:
       return {
         ...state,
-        // 前回の items に payload として渡ってきた新規の予定を追加した配列を返
-        items: [...state.items, { ...payload, id: state.items.length + 1 }],
+        // effects で追加に成功した予定だけをフロントの状態にも追加
+        items: [...state.items, payload],
       };
     case SCHEDULES_SET_LOADING:
       return {
