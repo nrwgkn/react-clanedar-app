@@ -14,6 +14,7 @@ const mapDisapatchToProps = (dispatch) => ({
 });
 
 // mergeProps: mapStateToProps で生成された props と mapDisapatchToProps で生成された props を引数にとり、コンポーネントで使う形に整形して渡す関数
+// mergeProps を独自に定義した場合は、自分で stateProps や dispatchProps を return してやらないと mergeProps で return したものしかコンポーネントに渡らない
 // mapStateToPropsの結果が前回と異なっていたときにだけ実行
 const mergeProps = (stateProps, dispatchProps) => ({
   ...stateProps,
