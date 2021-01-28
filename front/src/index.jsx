@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 import dayjs from "dayjs";
 import "dayjs/locale/ja";
 import DayjsUtils from "@date-io/dayjs";
@@ -12,7 +13,8 @@ import Navigation from "./components/Navigation/container";
 import AddScheduleDialog from "./components/AddScheduleDialog/container";
 import CurrentScheduleDialog from "./components/CurrentScheduleDialog/container";
 
-const store = createStore(rootReducer);
+// redux-thunk が普通の action なのか thunk の action なのかを判断する
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 dayjs.locale("ja");
 
