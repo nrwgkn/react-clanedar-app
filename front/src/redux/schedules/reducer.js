@@ -1,4 +1,8 @@
-import { SCHEDULES_ADD_ITEM } from "./actions";
+import {
+  SCHEDULES_ADD_ITEM,
+  SCHEDULES_FETCH_ITEM,
+  SCHEDULES_SET_LOADING,
+} from "./actions";
 
 const init = {
   items: [],
@@ -14,6 +18,17 @@ const schedulesReducer = (state = init, action) => {
         ...state,
         // 前回の items に payload として渡ってきた新規の予定を追加した配列を返
         items: [...state.items, { ...payload, id: state.items.length + 1 }],
+      };
+    case SCHEDULES_SET_LOADING:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case SCHEDULES_FETCH_ITEM:
+      return {
+        ...state,
+        isLoading: false,
+        items: payload,
       };
     default:
       return state;
