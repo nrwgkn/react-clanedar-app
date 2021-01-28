@@ -8,7 +8,12 @@ import {
   Input,
   Grid,
 } from "@material-ui/core";
-import { LocationOnOutlined, NotesOutlined } from "@material-ui/icons";
+import {
+  LocationOnOutlined,
+  NotesOutlined,
+  AccessTime,
+} from "@material-ui/icons";
+import { DatePicker } from "@material-ui/pickers";
 import { withStyles } from "@material-ui/core/styles";
 
 const spacer = { margin: "4px 0" };
@@ -35,6 +40,21 @@ const AddScheduleDialog = ({
           value={title}
           onChange={(e) => setSchedule({ title: e.target.value })}
         />
+        <Grid container spacing={1} alignItems="center" justify="space-between">
+          <Grid item>
+            <AccessTime />
+          </Grid>
+          <Grid item xs={10}>
+            <DatePicker
+              variant="inline"
+              format="YYYY年M月D日"
+              animateYearScrolling
+              disableToolbar
+              fullWidth
+              style={spacer}
+            />
+          </Grid>
+        </Grid>
         <Grid container spacing={1} alignItems="center" justify="space-between">
           <Grid item>
             <LocationOnOutlined />
