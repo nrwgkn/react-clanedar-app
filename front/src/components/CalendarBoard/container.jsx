@@ -24,6 +24,7 @@ const mapDisapatchToProps = (dispatch) => ({
     dispatch(addScheduleOpenDialog());
     dispatch(addScheduleSetValue({ date: d }));
   },
+
   openCurrentScheduleDialog: (schedule, e) => {
     // 他のイベントが発火するのをキャンセル
     e.stopPropagation();
@@ -31,7 +32,8 @@ const mapDisapatchToProps = (dispatch) => ({
     dispatch(currentScheduleSetItem(schedule));
     dispatch(currentScheduleOpenDialog());
   },
-  // 取得するべき月の情報がない
+
+  // この時点では取得するべき月の情報がない
   fetchSchedule: (month) => {
     dispatch(asyncSchedulesFetchItem(month));
   },
@@ -39,7 +41,7 @@ const mapDisapatchToProps = (dispatch) => ({
 
 // mergeProps: mapStateToProps で生成された props と mapDisapatchToProps で生成された props を引数にとり、コンポーネントで使う形に整形して渡す関数
 // mergeProps を独自に定義した場合は、自分で stateProps や dispatchProps を return してやらないと mergeProps で return したものしかコンポーネントに渡らない
-// mapStateToPropsの結果が前回と異なっていたときにだけ実行
+// mapStateToProps の結果が前回と異なっていたときにだけ実行
 const mergeProps = (stateProps, dispatchProps) => {
   const {
     calendar: month,
@@ -50,7 +52,7 @@ const mergeProps = (stateProps, dispatchProps) => {
   return {
     ...stateProps,
     ...dispatchProps,
-    // 現在の月情報をstateから取得、それを元に fetchSchedule を呼び出して必要な予定を取得する
+    // 現在の月情報を state から取得、それを元に fetchSchedule を呼び出して必要な予定を取得する
     fetchSchedule: () => dispatchProps.fetchSchedule(month),
     calendar,
     month,

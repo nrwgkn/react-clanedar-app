@@ -31,6 +31,7 @@ const mergeProps = (stateProps, dispatchProps) => ({
     dispatchProps.setMonth(nextMonth);
     dispatchProps.fetchItem(nextMonth);
   },
+
   // onClick: 前月を表示
   setPreviousMonth: () => {
     const previousMonth = getPreviousMonth(stateProps.calendar);

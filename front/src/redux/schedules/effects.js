@@ -11,6 +11,7 @@ export const asyncSchedulesFetchItem = ({ month, year }) => async (
 
   // 指定された月の予定を取得する API
   // 非同期処理が終わるまで処理をブロック
+  // Promise の中身だけを result に格納
   const result = await get(`schedules?month=${month}&year=${year}`);
 
   // date はこのままの形だと日付の操作ができないため dayjs インスタンスに変換
