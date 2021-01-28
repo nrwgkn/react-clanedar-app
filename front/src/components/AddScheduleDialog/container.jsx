@@ -3,6 +3,7 @@ import AddScheduleDialog from "./presentation";
 import {
   addScheduleCloseDialog,
   addScheduleSetValue,
+  addScheduleStartEdit,
 } from "../../redux/addSchedule/actions";
 import { asyncSchedulesAddItem } from "../../redux/schedules/effects";
 
@@ -19,6 +20,9 @@ const mapDisapatchToProps = (dispatch) => ({
     // 引数に schedule が必要だがここでは取得できないので、受け取った値をそのまま dispatch
     dispatch(asyncSchedulesAddItem(schedule));
     dispatch(addScheduleCloseDialog());
+  },
+  setIsEditStart: () => {
+    dispatch(addScheduleStartEdit());
   },
 });
 
