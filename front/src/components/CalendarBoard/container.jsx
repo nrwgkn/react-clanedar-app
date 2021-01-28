@@ -7,6 +7,10 @@ import {
   addScheduleOpenDialog,
   addScheduleSetValue,
 } from "../../redux/addSchedule/actions";
+import {
+  currentScheduleSetItem,
+  currentScheduleOpenDialog,
+} from "../../redux/currentSchedule/actions";
 
 // 状態の変更の監視を行い、store から必要な状態を選択して props の形にする
 const mapStateToProps = (state) => ({
@@ -18,6 +22,13 @@ const mapDisapatchToProps = (dispatch) => ({
   openAddScheduleDialog: (d) => {
     dispatch(addScheduleOpenDialog());
     dispatch(addScheduleSetValue({ date: d }));
+  },
+  openCurrentScheduleDialog: (schedule, e) => {
+    // 他のイベントが発火するのをキャンセル
+    e.stopPropagation();
+
+    dispatch(currentScheduleSetItem(schedule));
+    dispatch(currentScheduleOpenDialog());
   },
 });
 
