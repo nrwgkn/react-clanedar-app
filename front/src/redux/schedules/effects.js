@@ -3,6 +3,7 @@ import {
   schedulesFetchItem,
   schedulesAddItem,
   schedulesDeleteItem,
+  schedulesAsyncFailure,
 } from "./actions";
 import { get, post, deleteRequest } from "../../services/api";
 import { formatSchedule } from "../../services/schedule";
@@ -28,7 +29,7 @@ export const asyncSchedulesFetchItem = ({ month, year }) => async (
     // redux の状態として扱えるようになった formatedSchedule を dispatch
     dispatch(schedulesFetchItem(formatedSchedule));
   } catch (err) {
-    console.error(err);
+    dispatch(schedulesAsyncFailure(err.message));
   }
 };
 
@@ -47,7 +48,7 @@ export const asyncSchedulesAddItem = (schedule) => async (dispatch) => {
     // redux の状態として扱えるようになった newSchedule を dispatch
     dispatch(schedulesAddItem(newSchedule));
   } catch (err) {
-    console.error(err);
+    dispatch(schedulesAsyncFailure(err.message));
   }
 };
 
@@ -64,7 +65,7 @@ export const asyncSchedulesDeleteItem = (id) => async (dispatch, getState) => {
     const newSchedules = currentSchedules.filter((s) => s.id !== id);
     dispatch(schedulesDeleteItem(newSchedules));
   } catch (err) {
-    console.error(err);
+    dispatch(schedulesAsyncFailure(err.message));
   }
 
   // 削除の実行
