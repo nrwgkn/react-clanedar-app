@@ -8,7 +8,10 @@ import {
 } from "../../redux/addSchedule/actions";
 
 // 状態の変更の監視を行い、store から必要な状態を選択して props の形にする
-const mapStateToProps = (state) => ({ calendar: state.calendar });
+const mapStateToProps = (state) => ({
+  calendar: state.calendar,
+  schedules: state.schedules,
+});
 
 const mapDisapatchToProps = (dispatch) => ({
   openAddScheduleDialog: (d) => {
