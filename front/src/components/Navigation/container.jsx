@@ -7,12 +7,16 @@ import {
   formatMonth,
 } from "../../services/calendar";
 import { calendarSetMonth } from "../../redux/calendar/actions";
+import { asyncSchedulesFetchItem } from "../../redux/schedules/effects";
 
 const mapStateToProps = (state) => ({ calendar: state.calendar });
 
 const mapDispatchToProps = (dispatch) => ({
   setMonth: (month) => {
     dispatch(calendarSetMonth(month));
+  },
+  fetchItem: (month) => {
+    dispatch(asyncSchedulesFetchItem(month));
   },
 });
 
@@ -25,17 +29,21 @@ const mergeProps = (stateProps, dispatchProps) => ({
   setNextMonth: () => {
     const nextMonth = getNextMonth(stateProps.calendar);
     dispatchProps.setMonth(nextMonth);
+    dispatchProps.fetchItem(nextMonth);
   },
   // onClick: 前月を表示
   setPreviousMonth: () => {
     const previousMonth = getPreviousMonth(stateProps.calendar);
     dispatchProps.setMonth(previousMonth);
+    dispatchProps.fetchItem(previousMonth);
   },
 
-  // onChange: 変更があったら dayjs → redux の state に変換して dispatch
+  // onChange: Datepicker での月選択時
+  // 変更があったら dayjs → redux の state に変換して dispatch
   setMonth: (dayObj) => {
     const month = formatMonth(dayObj);
     dispatchProps.setMonth(month);
+    dispatchProps.fetchItem(month);
   },
 });
 
