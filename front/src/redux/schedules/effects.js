@@ -2,8 +2,9 @@ import {
   schedulesSetLoading,
   schedulesFetchItem,
   schedulesAddItem,
+  schedulesDeleteItem,
 } from "./actions";
-import { get, post } from "../../services/api";
+import { get, post, deleteRequest } from "../../services/api";
 import { formatSchedule } from "../../services/schedule";
 
 // 非同期処理
@@ -39,4 +40,18 @@ export const asyncSchedulesAddItem = (schedule) => async (dispatch) => {
   const newSchedule = formatSchedule(result);
   // redux の状態として扱えるようになった newSchedule を dispatch
   dispatch(schedulesAddItem(newSchedule));
+};
+
+export const asyncSchedulesDeleteItem = (id) => async (dispatch, getState) => {
+  // loading: true にする
+  dispatch(schedulesSetLoading());
+  // getState(): thunk の関数の第二引数で store のデータを取得することができる
+  const currentSchedules = getState().schedules.items;
+
+  // 削除の実行
+  await deleteRequest(`schedules/${id}`);
+
+  // 成功したらローカルの state を削除
+  const newSchedules = currentSchedules.filter((s) => s.id !== id);
+  dispatch(schedulesDeleteItem(newSchedules));
 };
