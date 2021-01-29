@@ -12,6 +12,7 @@ import CalendarBoard from "./components/CalendarBoard/container";
 import Navigation from "./components/Navigation/container";
 import AddScheduleDialog from "./components/AddScheduleDialog/container";
 import CurrentScheduleDialog from "./components/CurrentScheduleDialog/container";
+import ErrorSnackbar from "./components/ErrorSnackbar/container";
 
 // redux-thunk が普通の action なのか thunk の action なのかを判断する
 const store = createStore(rootReducer, applyMiddleware(thunk));
@@ -26,6 +27,7 @@ const App = () => (
       <CalendarBoard />
       <AddScheduleDialog />
       <CurrentScheduleDialog />
+      <ErrorSnackbar />
     </MuiPickersUtilsProvider>
   </Provider>
 );
