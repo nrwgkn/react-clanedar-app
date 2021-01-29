@@ -63,10 +63,9 @@ export const asyncSchedulesDeleteItem = (id) => async (dispatch, getState) => {
 
     // 成功したらローカルの state を削除
     const newSchedules = currentSchedules.filter((s) => s.id !== id);
+    // 削除の実行
     dispatch(schedulesDeleteItem(newSchedules));
   } catch (err) {
     dispatch(schedulesAsyncFailure(err.message));
   }
-
-  // 削除の実行
 };
