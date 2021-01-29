@@ -6,6 +6,7 @@ import {
   addScheduleStartEdit,
 } from "../../redux/addSchedule/actions";
 import { asyncSchedulesAddItem } from "../../redux/schedules/effects";
+import { isCloseDialog } from "../../services/schedule";
 
 const mapStateToProps = (state) => ({ schedule: state.addSchedule });
 
@@ -26,17 +27,27 @@ const mapDisapatchToProps = (dispatch) => ({
   },
 });
 
-const mergeProps = (stateProps, dispatchProps) => ({
-  ...stateProps,
-  ...dispatchProps,
-  // schedule を stateProps から取得できる
-  saveSchedule: () => {
-    const {
-      schedule: { form: schedule },
-    } = stateProps;
-    dispatchProps.saveSchedule(schedule);
-  },
-});
+const mergeProps = (stateProps, dispatchProps) => {
+  const {
+    schedule: { form: schedule },
+  } = stateProps;
+  const { saveSchedule, closeDialog } = dispatchProps;
+
+  return {
+    ...stateProps,
+    ...dispatchProps,
+    // schedule を stateProps から取得できる
+    saveSchedule: () => {
+      saveSchedule(schedule);
+    },
+    // isCloseDialog() で true が返ってきたときにのみ dispatch を実行する
+    closeDialog: () => {
+      if (isCloseDialog(schedule)) {
+        closeDialog();
+      }
+    },
+  };
+};
 
 export default connect(
   mapStateToProps,
